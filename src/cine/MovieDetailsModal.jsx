@@ -1,6 +1,6 @@
 import { getImgUrl } from "../utils/cine-utility";
 
-export default function MovieDetailsModal({ movie, onClose }) {
+export default function MovieDetailsModal({ movie, onClose, onCartAdd}) {
   return (
     <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center">
       <div className="w-full max-w-[420px] sm:max-w-[600px] lg:max-w-[984px] p-4 max-h-[90vh] overflow-auto">
@@ -20,6 +20,7 @@ export default function MovieDetailsModal({ movie, onClose }) {
               <a
                 className="bg-primary rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#171923] font-semibold text-sm"
                 href="#"
+                onClick={(e) => onCartAdd(e, movie)}
               >
                 <img src="./assets/tag.svg" alt="" />
                 <span>${movie.price} | Add to Cart</span>
