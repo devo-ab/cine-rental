@@ -1,14 +1,16 @@
 import logo from "../assets/logo.svg";
 import ring from "../assets/ring.svg";
 import moon from "../assets/icons/moon.svg";
+import sun from "../assets/icons/sun.svg";
 import cart from "../assets/shopping-cart.svg";
 import { useContext, useState } from "react";
 import CartDetails from "../cine/CartDetails";
-import { MovieContext } from "../context";
+import { MovieContext, ThemeContext } from "../context";
 
 export default function Header() {
   const [showCart, setShowCart] = useState(false);
   const { cartData } = useContext(MovieContext);
+  const { darkMood, setDarkMood } = useContext(ThemeContext);
 
   const handleShowCart = () => {
     setShowCart(true);
@@ -36,8 +38,13 @@ export default function Header() {
               <a
                 className="bg-primary/20 dark:bg-primary/[7%] rounded-lg backdrop-blur-[2px] p-1 inline-block"
                 href="#"
+                onClick={() => setDarkMood((darkMood) => !darkMood)}
               >
-                <img src={moon} width="24" height="24" alt="" />
+                {darkMood ? (
+                  <img src={sun} width="24" height="24" alt="" />
+                ) : (
+                  <img src={moon} width="24" height="24" alt="" />
+                )}
               </a>
             </li>
             <li>
@@ -47,7 +54,11 @@ export default function Header() {
                 onClick={handleShowCart}
               >
                 <img src={cart} width="24" height="24" alt="" />
-                {cartData.length > 0 && <span className="rounded-full absolute top-[-14px] right-[-23px] bg-[#12CF6F] text-white text-center p-[2px] w-[30px] h-[30px] mx-auto">{cartData.length}</span>}
+                {cartData.length > 0 && (
+                  <span className="rounded-full absolute top-[-14px] right-[-23px] bg-[#12CF6F] text-white text-center p-[2px] w-[30px] h-[30px] mx-auto">
+                    {cartData.length}
+                  </span>
+                )}
               </a>
             </li>
           </ul>
